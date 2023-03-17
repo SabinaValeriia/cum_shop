@@ -1,10 +1,5 @@
 <template>
   <div class="catalog">
-    <div class="header">
-      <router-link :to="{name: 'Cart'}">
-        <button>До каталогу</button>
-    </router-link>
-    </div>
     <router-link :to="{name: 'Cart', params: {cart_data: CART}}">
         <button>Cart: {{ CART.length }}</button>
     </router-link>
@@ -23,7 +18,7 @@
 import CatalogItem from "@/components/CatalogItem.vue";
 import {mapActions, mapGetters} from "vuex"
 export default {
-  name: "HomeView",
+  name: "CatalogComponent",
   components: {
     CatalogItem,
   },
@@ -51,10 +46,6 @@ export default {
 };
 </script>
 <style lang="scss">
-.header {
-  background-image: url("../assets/images/bg.jpg");
-  height: 700px;
-}
 .catalog {
   &__list {
     display: flex;
@@ -63,4 +54,3 @@ export default {
   }
 }
 </style>
-
