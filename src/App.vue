@@ -1,12 +1,44 @@
 <template>
   <div id="app">
-    <nav>
+    <!-- <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/catalog">Catalog</router-link>
-    </nav>
+      <router-link :to="{name: 'Cart', params: {cart_data: CART}}">
+        <button>Cart: {{ CART.length }}</button>
+    </router-link>
+    </nav> -->
     <router-view/>
   </div>
 </template>
+
+<script>
+
+import {mapActions, mapGetters} from "vuex"
+export default {
+  name: "HomeView",
+  data() {
+    return {};
+  },
+  computed: {
+    ...mapGetters(['PRODUCTS', 'CART'])
+  },
+  methods: {
+    addToCart(data) {
+      this.ADD_TO_CART(data)
+    },
+
+    ...mapActions(['GET_PRODUCTS_FROM_API', 'ADD_TO_CART']),
+  },
+  mounted() {
+    this.GET_PRODUCTS_FROM_API()
+    .then((response) => {
+        if(response.data) {
+            console.log('Data arrived!');
+        }
+    })
+  }
+};
+</script>
 
 <style lang="scss">
 #app {

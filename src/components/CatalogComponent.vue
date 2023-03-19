@@ -1,8 +1,8 @@
 <template>
-  <div class="catalog">
-    <router-link :to="{name: 'Cart', params: {cart_data: CART}}">
+  <div class="catalog container">
+    <!-- <router-link :to="{name: 'Cart', params: {cart_data: CART}}">
         <button>Cart: {{ CART.length }}</button>
-    </router-link>
+    </router-link> -->
     <h1>Catalog</h1>
     <div class="catalog__list">
       <CatalogItem
@@ -12,6 +12,7 @@
         @addToCart="addToCart"
       ></CatalogItem>
     </div>
+    <button>Переглянути все</button>
   </div>
 </template>
 <script>
@@ -47,10 +48,37 @@ export default {
 </script>
 <style lang="scss">
 .catalog {
+  h1 {
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 130%;
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #474A51;
+    margin: 160px auto 80px;
+  }
   &__list {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+  }
+  button {
+    padding: 15px 35px;
+    height: 51px;
+    border: 1px solid #474A51;
+    background: transparent;
+    font-family: 'Futura PT';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #474A51;
+    margin-bottom: 160px;
   }
 }
 </style>

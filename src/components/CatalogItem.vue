@@ -1,9 +1,9 @@
 <template>
     <div class="catalog-item">
         <img :src="require('../assets/images/'+ product_data.image)" alt="">
-        <p>{{ product_data.name }}</p>
-        <p>Price: {{product_data.price}} Uah</p>
-        <button @click="addToCart">Add to cart</button>
+        <h2>{{ product_data.name }}</h2>
+        <!-- <button @click="addToCart">Add to cart</button> -->
+        <p class="catalog-item__price">Price: {{product_data.price}} Uah</p>
     </div>
 </template>
 
@@ -84,12 +84,29 @@ export default {
 
 <style lang="scss">
 .catalog-item {
-    flex-basis: 25%;
-    box-shadow: 0 0 8px 0 #e0e0e0;
-    padding: 10px;
-    margin-bottom: 10px;
+    
     img{
-        height: 300px;
+        height: 600px;
+    }
+    h2 {
+      font-family: 'Futura PT';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 130%;
+      text-align: center;
+      color: #474A51;
+      margin: 20px 0 5px;
+    }
+    p {
+      font-family: 'Futura PT';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+      text-align: center;
+      color: #474A51;
+      margin: 0 0 80px;
     }
 }
 </style>

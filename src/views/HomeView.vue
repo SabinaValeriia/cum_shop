@@ -1,14 +1,13 @@
 <template>
-  <div class="catalog">
-    <div class="header">
-      <router-link :to="{name: 'Cart'}">
-        <button>До каталогу</button>
-    </router-link>
-    </div>
-    <router-link :to="{name: 'Cart', params: {cart_data: CART}}">
+  <div class="">
+    <HeaderComponent></HeaderComponent>
+    <CategoryComponent></CategoryComponent>
+    <CatalogComponent></CatalogComponent>
+    <LookBookHome></LookBookHome>
+    <InstaComponent></InstaComponent>
+    <!-- <router-link :to="{name: 'Cart', params: {cart_data: CART}}">
         <button>Cart: {{ CART.length }}</button>
     </router-link>
-    <h1>Catalog</h1>
     <div class="catalog__list">
       <CatalogItem
         v-for="product in PRODUCTS"
@@ -16,17 +15,26 @@
         :product_data="product"
         @addToCart="addToCart"
       ></CatalogItem>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
-import CatalogItem from "@/components/CatalogItem.vue";
+// import CatalogItem from "@/components/CatalogItem.vue";
+import HeaderComponent from "@/components/HeaderComponent.vue";
+import CatalogComponent from "@/components/CatalogComponent.vue";
+import CategoryComponent from "@/components/CategoryComponent.vue";
+import InstaComponent from "@/components/InstaComponent.vue";
 import {mapActions, mapGetters} from "vuex"
+import LookBookHome from "@/components/LookBookHome.vue";
 export default {
   name: "HomeView",
   components: {
-    CatalogItem,
-  },
+    HeaderComponent,
+    CategoryComponent,
+    CatalogComponent,
+    LookBookHome,
+    InstaComponent
+},
   data() {
     return {};
   },
@@ -51,10 +59,14 @@ export default {
 };
 </script>
 <style lang="scss">
-.header {
-  background-image: url("../assets/images/bg.jpg");
-  height: 700px;
+body{
+  margin: 0 auto;
+  overflow-x: hidden;
 }
+// .header {
+//   background-image: url("../assets/images/bg.jpg");
+//   height: 700px;
+// }
 .catalog {
   &__list {
     display: flex;

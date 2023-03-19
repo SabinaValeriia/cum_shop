@@ -1,0 +1,79 @@
+<template lang="pug">
+.instagram 
+    h2 НАШ ИНСТАГРАМ
+    a @loylen_brand
+    .instagram__block
+        div
+            a(href="https://www.instagram.com/p/ChEg9YosOM_/?igshid=YmMyMTA2M2Y=") Перейти до інстаграму
+        img(src="../assets/images/insta2.svg")
+        img(src="../assets/images/insta3.svg")
+        img(src="../assets/images/insta4.svg")
+</template>
+
+<style lang="scss">
+.instagram {
+    margin-top: 160px;
+    h2{
+        font-family: 'Futura PT';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 130%;
+        text-align: center;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: #474A51;
+        margin: 0 0 30px;
+    }
+    a {
+        font-family: 'Lovelace';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 52px;
+        line-height: 130%;
+        text-align: center;
+        text-transform: uppercase;
+        color: #474A51;
+        margin: 0 0 80px;
+    }
+    &__block {
+        display: flex;
+        margin-top: 80px;
+        div{
+            background-image: url("../assets/images/insta1.svg");
+            height: 350px;
+            width: 350px;
+            cursor: pointer;
+            position: relative;
+            &:hover{
+                background: rgba(221, 232, 246, 0.6);
+                // opacity: 0.6;
+            }
+        }
+        div > a {
+            display: flex;
+            align-self: center;
+            text-decoration: none;
+            display: none; 
+            font-family: 'Futura PT';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 130%;
+            text-align: center;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: #000000;
+        }
+        div:hover > a { 
+            display: flex; 
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+        img {
+        }
+    }
+}
+</style>
