@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import RegistrationView from '../views/RegistrationView.vue'
 import CatalogComponent from "../components/CatalogComponent.vue"
 import CartComponent from "../components/CartComponent.vue"
 
@@ -22,6 +23,11 @@ const routes = [
     name: 'Cart',
     component: CartComponent,
     props: true
+  },
+  {
+    path: '/registration',
+    name: 'Registration',
+    component: RegistrationView,
   },
   {
     path: '/about',
