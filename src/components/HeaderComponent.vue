@@ -2,14 +2,17 @@
 .container
     .header 
         ul 
-            li Каталог
+            router-link(:to="{name: 'Catalog'}")
+                li Каталог
             li lookbook
             li про бренд
             li інформація
-        img(src="../assets/images/logo.svg")
+        router-link(:to="{name: 'Home'}")
+            img(src="../assets/images/logo.svg")
         .header__block 
             img(src="../assets/images/search.svg")
-            img(src="../assets/images/lr.svg")
+            router-link(:to="{name: 'Registration'}")
+                img(src="../assets/images/lr.svg")
             img(src="../assets/images/favorite.svg")
             router-link(:to="{name: 'Cart', params: {cart_data: CART}}")
                 img(src="../assets/images/cart.svg" class="header__cart")  
