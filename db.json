@@ -6,7 +6,8 @@
         "price": 5000,
         "article": "T1",
         "available": true,
-        "category": "Мужские"
+        "category": "Женские",
+        "color": "black"
       },
       {
         "image": "8.jpg",
@@ -22,7 +23,7 @@
         "price": 4000,
         "article": "T3",
         "available": false,
-        "category": "Женские"
+        "category": "Тренч"
       },
       {
         "image": "4.jpg",
@@ -30,7 +31,7 @@
         "price": 4500,
         "article": "T4",
         "available": true,
-        "category": "Мужские"
+        "category": "Рубашка"
       },
       {
         "image": "5.jpg",
@@ -38,36 +39,12 @@
         "price": 8000,
         "article": "T5",
         "available": false,
-        "category": "Женские"
+        "category": "Сукня"
       },
       {
         "image": "3.jpg",
         "name": "Домашній комплект",
         "price": 4500,
-        "article": "T6",
-        "available": true,
-        "category": "Женские"
-      },
-      {
-        "image": "6.jpg",
-        "name": "Базова водолазка",
-        "price": 3000,
-        "article": "T4",
-        "available": true,
-        "category": "Мужские"
-      },
-      {
-        "image": "2.jpg",
-        "name": "Базова футболка",
-        "price": 2000,
-        "article": "T5",
-        "available": false,
-        "category": "Женские"
-      },
-      {
-        "image": "1.jpg",
-        "name": "Класичні брюки",
-        "price": 5000,
         "article": "T6",
         "available": true,
         "category": "Женские"

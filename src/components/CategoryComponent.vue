@@ -1,7 +1,7 @@
 <template lang="pug">
 .category 
     .category__block-first
-        router-link(:to="{name: 'Cart'}")
+        router-link(:to="{name: 'Catalog'}")
             button До каталогу
     .category__block
         .category__block-second
@@ -22,6 +22,8 @@
             background-image: url("../assets/images/bg.jpg");
             height: 700px;
             position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
             button {
                 padding: 15px 35px;
                 left: 50%;
@@ -39,6 +41,8 @@
             height: 600px;
             width: 50%;
             position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
             p {
                 font-family: 'Futura PT';
                 font-style: normal;
@@ -81,6 +85,8 @@
             height: 600px;
             width: 50%;
             position: relative;
+            background-size: cover;
+            background-repeat: no-repeat;
             p {
                 font-family: 'Futura PT';
                 font-style: normal;

@@ -2660,6 +2660,11 @@ deepmerge@^1.5.2:
   resolved "https://registry.npmjs.org/deepmerge/-/deepmerge-1.5.2.tgz"
   integrity sha512-95k0GDqvBjZavkuvzx/YqVLv/6YYa17fz6ILMSf7neqQITCPbnfEnQvEgMPNjH4kgobe7+WIL0yJEHku+H3qtQ==
 
+deepmerge@^4.2.2:
+  version "4.3.1"
+  resolved "https://registry.npmjs.org/deepmerge/-/deepmerge-4.3.1.tgz"
+  integrity sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==
+
 default-gateway@^6.0.3:
   version "6.0.3"
   resolved "https://registry.npmjs.org/default-gateway/-/default-gateway-6.0.3.tgz"
@@ -5560,6 +5565,11 @@ shell-quote@^1.7.3:
   resolved "https://registry.npmjs.org/shell-quote/-/shell-quote-1.8.0.tgz"
   integrity sha512-QHsz8GgQIGKlRi24yFc6a6lN69Idnx634w49ay6+jA5yFh7a1UY+4Rp6HPx/L/1zcEDPEij8cIsiqR6bQsE5VQ==
 
+shvl@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npmjs.org/shvl/-/shvl-2.0.3.tgz"
+  integrity sha512-V7C6S9Hlol6SzOJPnQ7qzOVEWUQImt3BNmmzh40wObhla3XOYMe4gGiYzLrJd5TFa+cI2f9LKIRJTTKZSTbWgw==
+
 side-channel@^1.0.4:
   version "1.0.4"
   resolved "https://registry.npmjs.org/side-channel/-/side-channel-1.0.4.tgz"
@@ -5889,6 +5899,11 @@ thread-loader@^3.0.0:
     neo-async "^2.6.2"
     schema-utils "^3.0.0"
 
+three@^0.135.0:
+  version "0.135.0"
+  resolved "https://registry.npmjs.org/three/-/three-0.135.0.tgz"
+  integrity sha512-kuEpuuxRzLv0MDsXai9huCxOSQPZ4vje6y0gn80SRmQvgz6/+rI0NAvCRAw56zYaWKMGMfqKWsxF9Qa2Z9xymQ==
+
 thunky@^1.0.2:
   version "1.1.0"
   resolved "https://registry.npmjs.org/thunky/-/thunky-1.1.0.tgz"
@@ -6052,6 +6067,13 @@ void-elements@^3.1.0:
   resolved "https://registry.npmjs.org/void-elements/-/void-elements-3.1.0.tgz"
   integrity sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==
 
+vue-3d-model@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.npmjs.org/vue-3d-model/-/vue-3d-model-1.4.1.tgz"
+  integrity sha512-IQjpqEjK1OLF/0XgF6O++IvOPLinLQ2aWZQFHxPFoTfPlB4vQW2sgv8EJSqpsIYC/wSCdGlP3CEnv9L3aZHlow==
+  dependencies:
+    three "^0.135.0"
+
 vue-axios@^3.5.2:
   version "3.5.2"
   resolved "https://registry.npmjs.org/vue-axios/-/vue-axios-3.5.2.tgz"
@@ -6084,6 +6106,13 @@ vue-loader@^17.0.0:
     hash-sum "^2.0.0"
     loader-utils "^2.0.0"
 
+vue-product-spinner@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/vue-product-spinner/-/vue-product-spinner-0.2.0.tgz"
+  integrity sha512-x0CR+vg8wBxuQDY2HELNEwB9tSkYDuqJYwDgIORQaLgtv5eYnyzu/IrDIksc0gm2DAqsG91H53w9R8CbUt44rQ==
+  dependencies:
+    vue "2.6.3"
+
 vue-router@^3.5.1:
   version "3.6.5"
   resolved "https://registry.npmjs.org/vue-router/-/vue-router-3.6.5.tgz"
@@ -6110,7 +6139,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
-vue@*, "vue@^2 || ^3.2.13", vue@^2.0.0, vue@^2.6.14, "vue@^3.0.0 || ^2.0.0":
+vue@*, "vue@^2 || ^3.2.13", vue@^2.0.0, vue@^2.6.14, "vue@^3.0.0 || ^2.0.0", vue@>=2.0.0:
   version "2.7.14"
   resolved "https://registry.npmjs.org/vue/-/vue-2.7.14.tgz"
   integrity sha512-b2qkFyOM0kwqWFuQmgd4o+uHGU7T+2z3T+WQp8UBjADfEv2n4FEMffzBmCKNP0IGzOEEfYjvtcC62xaSKeQDrQ==
@@ -6118,7 +6147,20 @@ vue@*, "vue@^2 || ^3.2.13", vue@^2.0.0, vue@^2.6.14, "vue@^3.0.0 || ^2.0.0":
     "@vue/compiler-sfc" "2.7.14"
     csstype "^3.1.0"
 
-vuex@^3.6.2:
+vue@2.6.3:
+  version "2.6.3"
+  resolved "https://registry.npmjs.org/vue/-/vue-2.6.3.tgz"
+  integrity sha512-yftjtahz4UTAtOlXXuw7UaYD86fWrMDAAzqTdqJJx2FIBqcPmBN6kPBHiBJFGaQELVblb5ijbFMXsx0i0F7q3g==
+
+vuex-persistedstate@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.npmjs.org/vuex-persistedstate/-/vuex-persistedstate-4.1.0.tgz"
+  integrity sha512-3SkEj4NqwM69ikJdFVw6gObeB0NHyspRYMYkR/EbhR0hbvAKyR5gksVhtAfY1UYuWUOCCA0QNGwv9pOwdj+XUQ==
+  dependencies:
+    deepmerge "^4.2.2"
+    shvl "^2.0.3"
+
+"vuex@^3.0 || ^4.0.0-rc", vuex@^3.6.2:
   version "3.6.2"
   resolved "https://registry.npmjs.org/vuex/-/vuex-3.6.2.tgz"
   integrity sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==

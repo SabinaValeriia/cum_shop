@@ -2,8 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RegistrationView from '../views/RegistrationView.vue'
-import CatalogComponent from "../components/CatalogComponent.vue"
+import CatalogView from '../views/CatalogView.vue'
+import LookBookView from '../views/LookBookView.vue'
 import CartComponent from "../components/CartComponent.vue"
+import InfoView from '../views/InfoView.vue'
 
 Vue.use(VueRouter)
 
@@ -16,7 +18,7 @@ const routes = [
   {
     path: '/catalog',
     name: 'Catalog',
-    component: CatalogComponent
+    component: CatalogView
   },
   {
     path: '/cart',
@@ -30,8 +32,18 @@ const routes = [
     component: RegistrationView,
   },
   {
+    path: '/lookbook',
+    name: 'LookBook',
+    component: LookBookView,
+  },
+  {
+    path: '/info',
+    name: 'Info',
+    component: InfoView,
+  },
+  {
     path: '/about',
-    name: 'about',
+    name: 'About',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.

@@ -104,7 +104,7 @@ export default {
   }
   &-item {
     img {
-      height: 600px;
+      height: 420px;
     }
     h2 {
       font-family: "Futura PT";
