@@ -34,7 +34,6 @@
       color: #474a51;
       text-align: left;
       margin: 0 0 10px;
-      width: 407px;
       &.tablet {
         display: none;
       }

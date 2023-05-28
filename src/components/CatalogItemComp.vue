@@ -30,31 +30,33 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/styles/core/global.scss";
 .catalog {
-  &-block{
+  &-block {
     position: relative;
     button {
       bottom: 6px;
       left: 0;
-      font-family: 'Futura PT';
+      font-family: "PTSans", sans-serif;
       font-style: normal;
       font-weight: 400;
       font-size: 16px;
       line-height: 130%;
       text-align: center;
-      color: #474A51;
-      background: #DDE8F6 !important;
+      color: #474a51;
+      background: #dde8f6 !important;
       height: 70px;
-      width: 100%;
+      width: 297px;
       cursor: pointer;
     }
   }
   &-item {
     img {
+      width: 297px;
       height: 420px;
     }
     h2 {
-      font-family: "Futura PT";
+      font-family: "PTSans", sans-serif;
       font-style: normal;
       font-weight: 400;
       font-size: 24px;
@@ -62,9 +64,10 @@ export default {
       text-align: center;
       color: #474a51;
       margin: 20px 0 5px;
+      width: 298px;
     }
     p {
-      font-family: "Futura PT";
+      font-family: "PTSans", sans-serif;
       font-style: normal;
       font-weight: 400;
       font-size: 16px;
@@ -78,6 +81,114 @@ export default {
       margin: 0;
       background: transparent;
       position: absolute;
+    }
+  }
+}
+@media (max-width: 1021px) {
+  .catalog {
+    &-block {
+      button {
+        bottom: 6px;
+        left: 0;
+        font-family: "PTSans", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 130%;
+        text-align: center;
+        color: #474a51;
+        background: #dde8f6 !important;
+        height: 52px;
+        width: 219px;
+        cursor: pointer;
+      }
+    }
+    &-item {
+      img {
+        width: 219px;
+        height: 310px;
+      }
+      h2 {
+        font-family: "PTSans", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 130%;
+        text-align: center;
+        color: #474a51;
+        margin: 20px 0 5px;
+        width: 200px;
+      }
+      p {
+        font-family: "PTSans", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 130%;
+        text-align: center;
+        color: #474a51;
+        margin: 0 0 80px;
+      }
+      button {
+        border: none;
+        margin: 0;
+        background: transparent;
+        position: absolute;
+      }
+    }
+  }
+}
+@media (max-width: 700px) {
+  .catalog {
+    &-block {
+      button {
+        bottom: 6px;
+        left: 0;
+        font-family: "PTSans", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 130%;
+        text-align: center;
+        color: #474a51;
+        background: #dde8f6 !important;
+        height: 52px;
+        width: 100%;
+        cursor: pointer;
+      }
+    }
+    &-item {
+      img {
+        width: 100%;
+        height: auto;
+      }
+      h2 {
+        font-family: "PTSans", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 130%;
+        text-align: center;
+        color: #474a51;
+        margin: 20px 0 5px;
+        width: 100%;
+      }
+      p {
+        font-family: "PTSans", sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 130%;
+        text-align: center;
+        color: #474a51;
+        margin: 0 0 0;
+      }
+      button {
+        border: none;
+        margin: 0;
+        background: transparent;
+        position: absolute;
+      }
     }
   }
 }

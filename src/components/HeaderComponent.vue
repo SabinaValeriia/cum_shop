@@ -14,10 +14,10 @@
       li 
         router-link(:to="{name: 'Info'}") інформація
     .header--block 
-        img(src="../assets/images/search.svg")
         router-link(:to="{name: 'Registration'}")
           img(src="../assets/images/lr.svg")
-        img(src="../assets/images/favorite.svg")
+        router-link(:to="{name: 'Registration'}")
+          img(src="../assets/images/favorite.svg")
         router-link(:to="{name: 'Cart', params: {cart_data: CART}}")
           .header--cart
             img.header__cart--img(src="../assets/images/cart.svg")  
@@ -56,10 +56,11 @@
     router-link(:to="{name: 'Home'}")
       img(src="../assets/images/logo.svg")
     .header--block 
-      img(src="../assets/images/search.svg")
+      input(type="text" v-if="showInput" v-model="searchQuery" placeholder="Пошук" @input="search")
       router-link(:to="{name: 'Registration'}")
         img(src="../assets/images/lr.svg")
-      img(src="../assets/images/favorite.svg")
+      router-link(:to="{name: 'Favorite'}")
+        img(src="../assets/images/favorite.svg")
       router-link(:to="{name: 'Cart', params: {cart_data: CART}}")
         .header--cart
           img.header__cart--img(src="../assets/images/cart.svg")  
@@ -68,12 +69,16 @@
 <script>
 import CatalogItem from "@/components/CatalogItem.vue";
 import { mapActions, mapGetters } from "vuex";
+import { debounce } from "lodash";
 export default {
   components: {
     CatalogItem,
   },
   data() {
-    return {};
+    return {
+      showInput: false,
+      searchQuery: "",
+    };
   },
   computed: {
     ...mapGetters(["PRODUCTS", "CART"]),
@@ -90,8 +95,18 @@ export default {
     },
 
     ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART"]),
+    search: debounce(function () {
+      // Handle the search functionality using the searchQuery value
+      // You can implement your own logic here, such as filtering the products based on the searchQuery
+      console.log("Search query:", this.searchQuery);
+    }, 300),
+    showSearchInput() {
+      this.showInput = !this.showInput;
+      if (!this.showInput) {
+        this.searchQuery = ""; // Clear the search query when hiding the input
+      }
+    },
   },
- 
 };
 </script>
 
@@ -169,10 +184,6 @@ export default {
 
   img {
     cursor: pointer;
-
-    &:nth-child(2) {
-      margin: 0 30px;
-    }
   }
 }
 @media (max-width: 1021px) {

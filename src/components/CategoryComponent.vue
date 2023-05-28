@@ -3,15 +3,15 @@
     .category__block-first
         router-link(:to="{name: 'Catalog'}")
             button До каталогу
-    .category__block
-        .category__block-second
-            router-link(:to="{name: 'Cart'}")
-                p  Новинки
-                button Дивитися
-        .category__block-third
-            router-link(:to="{name: 'Cart'}")
-                p  Розпродаж
-                button Дивитися
+    //- .category__block
+    //-     .category__block-second
+    //-         router-link(:to="{name: 'Cart'}")
+    //-             p  Новинки
+    //-             button Дивитися
+    //-     .category__block-third
+    //-         router-link(:to="{name: 'Cart'}")
+    //-             p  Розпродаж
+    //-             button Дивитися
 </template>
 
 <style lang="scss">

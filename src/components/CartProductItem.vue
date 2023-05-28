@@ -1,6 +1,6 @@
 <template lang="pug">
 .container
-  .product-main
+  .product-main(v-if="productData")
     .product-main--imgs
         .product-main--imgs-block
             img(:src="require('../assets/images/' + productData.image)" alt="")
@@ -17,12 +17,13 @@
         h3 Виробник:
         p Виробник: {{ productData.descT }}
         .product-main--button 
-            button Додати до кошика
+            button(@click="addToCart") Додати до кошика
             
    
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   name: "CartItem",
   data() {
@@ -39,20 +40,13 @@ export default {
     },
   },
   methods: {
-    // showCardDetails(cart_item_data) {
-    //   console.log(cart_item_data)
-    //   this.$emit("showCardDetails", cart_item_data); // Генерируйте событие, чтобы передать выбранную карточку в родительский компонент
-    // }
-    // showCardDetails(cart_item_data) {
-    //   this.$router.push({
-    //     name: "CartProduct",
-    //     params: { article: cart_item_data.article },
-    //     query: { data: cart_item_data },
-    //   });
-    // },
-    ddToCart(data) {
+    addToCart(data) {
       this.ADD_TO_CART(data);
     },
+    handleAddToCart() {
+      this.$emit("addToCart", this.product_data);
+    },
+    ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART"]),
   },
   created() {
     // Получение артикула товара из параметров маршрута

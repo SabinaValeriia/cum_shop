@@ -90,7 +90,6 @@ export default {
   background: #eeeeee;
   padding: 120px 0 150px;
   width: 100%;
-
   .footer--block {
     display: flex;
     justify-content: space-between;
@@ -354,4 +353,5 @@ export default {
       }
     }
   }
-}</style>
+}
+</style>

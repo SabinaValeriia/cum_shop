@@ -6,7 +6,7 @@
         h1 Каталог
         .catalog__list
           CatalogItem(
-            v-for="product in sortedProducts"
+            v-for="(product, index) in sortedProducts.slice(0, 6)"
             :key="product.article"
             :product_data="product"
             @addToCart="addToCart"
@@ -91,6 +91,10 @@
       max-width: 100%;
       margin: 0 30px;
     }
+    @media (max-width: 375px) {
+      max-width: 100%;
+      margin: 0 10px;
+    }
   }
   .catalog {
     h1 {
@@ -107,7 +111,6 @@
     }
     &__list {
       display: flex;
-      justify-content: center;
       gap: 30px;
       flex-wrap: wrap;
     }
@@ -127,5 +130,42 @@
       margin-bottom: 160px;
     }
   }
+  @media (max-width: 375px) {
+    .catalog {
+    h1 {
+      font-family: "Futura PT";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 52px;
+      line-height: 130%;
+      text-align: center;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #474a51;
+      margin: 50px auto 30px;
+    }
+    &__list {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 15px 35px;
+      height: 51px;
+      border: 1px solid #474a51;
+      background: transparent;
+      font-family: "Futura PT";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #474a51;
+      margin-bottom: 160px;
+    }
+  }
+    }
   </style>
   

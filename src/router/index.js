@@ -7,6 +7,10 @@ import LookBookView from '../views/LookBookView.vue'
 import CartComponent from "../components/CartComponent.vue"
 import InfoView from '../views/InfoView.vue'
 import CartView from '../views/CartView.vue'
+import FavoriteView from '../views/FavoriteView.vue'
+import DeliveryView from '../views/DeliveryView.vue'
+import ResultView from '../views/ResultView.vue'
+
 
 Vue.use(VueRouter)
 
@@ -22,9 +26,26 @@ const routes = [
     component: CatalogView
   },
   {
+    path: '/favorite',
+    name: 'Favorite',
+    component: FavoriteView
+  },
+  {
     path: '/cart',
     name: 'Cart',
     component: CartComponent,
+    props: true
+  },
+  {
+    path: '/result',
+    name: 'Result',
+    component: ResultView,
+    props: true
+  },
+  {
+    path: '/delivery',
+    name: 'Delivery',
+    component: DeliveryView,
     props: true
   },
   {

@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div.main
     //- modale-test
     header-component
     category-component
@@ -56,12 +56,10 @@ export default {
 <style lang="scss" scoped>
 body {
   margin: 0 auto;
+}
+.main{
   overflow-x: hidden;
 }
-// .header {
-//   background-image: url("../assets/images/bg.jpg");
-//   height: 700px;
-// }
 button {
   padding: 15px 35px;
   height: 51px;

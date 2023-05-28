@@ -24,7 +24,8 @@
             .cart__total-block
               h2 Загалом
               h2 {{ cartTotalCost }} UAH
-            button Оформити замовлення
+            router-link(:to="{ name: 'Delivery',  params: { totalCost: cartTotalCost } }")
+              button Оформити замовлення
             p Натискаючи на кнопку, ви підтверджуєте, що ознайомлені та згодні з офертою та політикою конфіденційності.
     footer-component
 </template>
@@ -44,9 +45,9 @@ export default {
   },
   props: {
     cart_data: {
-      type: Object,
+      type: Array,
       default() {
-        return {};
+        return [];
       },
     },
   },

@@ -1,13 +1,6 @@
 <template lang="pug">
   div
-    header-component
-      //- div(v-if="relatedProducts.length > 0")
-      //-   .catalog__list
-      //-       CatalogItem(
-      //-         v-for="relatedProduct in relatedProducts"
-      //-         :key="relatedProduct.article"
-      //-         :product_data="relatedProduct"
-      //-         @addToCart="addToCart")
+    header-component      @addToCart="addToCart")
     .related
         .related--block
           div.related--blocks
