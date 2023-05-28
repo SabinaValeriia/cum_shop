@@ -1,22 +1,29 @@
-<template lang="pug">
-  .cart-item
-      img(:src="require('../assets/images/' + cart_item_data.image)" alt="") 
-      .cart-item__info
-        h2 {{ cart_item_data.name }} 
-        .cart-item__info
-        .cart-item__block
-          p Розмір
-          p Колір
-        .cart-item__quantity
-          .cart-item__block
-            p Кількість:
-            p
-                span(@click="decrementItem") - 
-                span {{ cart_item_data.quantity }}
-                span(@click="incrementItem") +
-        p.article Артикул: {{ cart_item_data.article }}
-        p.price {{ cart_item_data.price }} UAH
-        button(@click="deleteFromCart")
+<template>
+  <div class="cart-item">
+    <router-link :to="{ name: 'CartProduct', params: { article: cart_item_data.article }, query: { data: cart_item_data } }">
+      <img :src="require('../assets/images/' + cart_item_data.image)" @click="showCardDetails(cart_item_data)" alt="" />
+    </router-link>
+    <div class="cart-item__info">
+      <h2>{{ cart_item_data.name }}</h2>
+      <div class="cart-item__block">
+        <p>Розмір</p>
+        <p>Колір</p>
+      </div>
+      <div class="cart-item__quantity">
+        <div class="cart-item__block">
+          <p>Кількість:</p>
+          <p>
+            <span @click="decrementItem">-</span>
+            <span>{{ cart_item_data.quantity }}</span>
+            <span @click="incrementItem">+</span>
+          </p>
+        </div>
+      </div>
+      <p class="article">Артикул: {{ cart_item_data.article }}</p>
+      <p class="price">{{ cart_item_data.price }} UAH</p>
+      <button @click="deleteFromCart"></button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -30,13 +37,6 @@ export default {
       },
     },
   },
-  data() {
-    return {};
-  },
-  computed: {},
-  mounted() {
-    this.$set(this.cart_item_data, "quantity", 1);
-  },
   methods: {
     deleteFromCart() {
       this.$emit("deleteFromCart");
@@ -47,9 +47,21 @@ export default {
     incrementItem() {
       this.$emit("increment");
     },
+    // showCardDetails(cart_item_data) {
+    //   console.log(cart_item_data)
+    //   this.$emit("showCardDetails", cart_item_data); // Генерируйте событие, чтобы передать выбранную карточку в родительский компонент
+    // }
+    showCardDetails(cart_item_data) {
+      this.$router.push({
+        name: 'CartProduct',
+        params: { article: cart_item_data.article },
+        query: { data: cart_item_data }
+      });
+    }
   },
 };
 </script>
+
 
 <style lang="scss" scoped>
 .cart-item {

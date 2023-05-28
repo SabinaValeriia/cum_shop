@@ -1,39 +1,40 @@
-<!-- <template lang="pug">
-div
+<template lang="pug">
+  div
     header-component
     .container
-        .cart
-            h1 Кошик
-            h2(v-if="!cart_data.length") У Вас ще не додано ніяких товарів ...
-                router-link(:to="{name: 'Catalog'}")
-                    button До каталогу
-            .cart-block(v-else)
-                .cart-items
-                    CartItem(
-                        v-for="(item, index) in cart_data"
-                        :key="item.article"
-                        :cart_item_data="item"
-                        @deleteFromCart="deleteFromCart(index)"
-                        @increment="increment(index)"
-                        @decrement="decrement(index)")
-                .cart__total
-                    .cart__total-block
-                        h2 Сума замовлення
-                        h2 {{ cartTotalCost }} UAH
-                    .cart__total-block
-                        h2 Загалом
-                        h2 {{ cartTotalCost }} UAH
-                    button Оформити замовлення
-                    p Натискаючи на кнопку, ви підтверджуєте, що ознайомлені та згодні з офертою та політикою конфіденційності.
-                    //- .cart-ordering    
-                    //-     h2 Промокод
+      .cart
+        h1 Кошик
+        h2(v-if="!cart_data.length") У Вас ще не додано ніяких товарів ...
+          router-link(:to="{name: 'Catalog'}")
+            button До каталогу
+        .cart-block(v-else)
+          .cart-items
+            CartItem(
+              v-for="(item, index) in cart_data"
+              :key="item.article"
+              :cart_item_data="item"
+              @deleteFromCart="deleteFromCart(index)"
+              @increment="increment(index)"
+              @decrement="decrement(index)"
+            )
+          .cart__total
+            .cart__total-block
+              h2 Сума замовлення
+              h2 {{ cartTotalCost }} UAH
+            .cart__total-block
+              h2 Загалом
+              h2 {{ cartTotalCost }} UAH
+            button Оформити замовлення
+            p Натискаючи на кнопку, ви підтверджуєте, що ознайомлені та згодні з офертою та політикою конфіденційності.
     footer-component
 </template>
+
 <script>
 import CartItem from "./CartItem.vue";
 import HeaderComponent from "./HeaderComponent.vue";
 import FooterComponent from "./FooterComponent.vue";
 import { mapActions } from "vuex";
+
 export default {
   name: "CartComponent",
   components: {
@@ -43,14 +44,11 @@ export default {
   },
   props: {
     cart_data: {
-      type: Array,
+      type: Object,
       default() {
-        return [];
+        return {};
       },
     },
-  },
-  data() {
-    return {};
   },
   computed: {
     cartTotalCost() {
@@ -78,117 +76,10 @@ export default {
     decrement(index) {
       this.DECREMENT_CART_ITEM(index);
     },
-    saveCartToLocalStorage() {
-      localStorage.setItem("cart", JSON.stringify(this.cart_data));
-    },
-    ...mapActions([
-      "DELETE_FROM_CART",
-      "INCREMENT_CART_ITEM",
-      "DECREMENT_CART_ITEM",
-    ]),
-  },
-  created() {
-  this.$store.dispatch("loadCartFromLocalStorage");
-}
-
-};
-</script> -->
-
-<template lang="pug">
-  div
-    header-component
-    .container
-      .cart
-        h1 Кошик
-        h2(v-if="!cart_data.length") У Вас ще не додано ніяких товарів ...
-          router-link(:to="{name: 'Catalog'}")
-            button До каталогу
-        .cart-block(v-else)
-          .cart-items
-            CartItem(
-              v-for="(item, index) in cart_data"
-              :key="item.article"
-              :cart_item_data="item"
-              @deleteFromCart="deleteFromCart(index)"
-              @increment="increment(index)"
-              @decrement="decrement(index)"
-            )
-          .cart__total
-            .cart__total-block
-              h2 Сума замовлення
-              h2 {{ cartTotalCost }} UAH
-            .cart__total-block
-              h2 Загалом
-              h2 {{ cartTotalCost }} UAH
-            button(@click="checkout") Оформити замовлення
-            p Натискаючи на кнопку, ви підтверджуєте, що ознайомлені та згодні з офертою та політикою конфіденційності.
-    footer-component
-</template>
-
-<script>
-import CartItem from "./CartItem.vue";
-import HeaderComponent from "./HeaderComponent.vue";
-import FooterComponent from "./FooterComponent.vue";
-import { mapActions } from "vuex";
-
-export default {
-  name: "CartComponent",
-  components: {
-    CartItem,
-    HeaderComponent,
-    FooterComponent,
-  },
-  props: {
-    cart_data: {
-      type: Object,
-      default() {
-        return {};
-      },
-      required: true,
-    },
-  },
-  computed: {
-    cartTotalCost() {
-    return this.cart_data.reduce((sum, item) => {
-      return sum + (item.price || 0) * (item.quantity || 0);
-    }, 0);
-  },  },
-  methods: {
-    deleteFromCart(index) {
-      this.DELETE_FROM_CART(index);
-      this.saveCartToLocalStorage();
-    },
-    increment(index) {
-      this.INCREMENT_CART_ITEM(index);
-      this.saveCartToLocalStorage();
-    },
-    decrement(index) {
-      this.DECREMENT_CART_ITEM(index);
-      this.saveCartToLocalStorage();
-    },
-    checkout() {
-      // Perform checkout process
-      // ...
-      // Save cart data to localStorage
-      this.saveCartToLocalStorage();
-    },
-    saveCartToLocalStorage() {
-      localStorage.setItem("cart", JSON.stringify(this.cart_data));
-    },
-    loadCartFromLocalStorage() {
-      const savedCart = localStorage.getItem("cart");
-      if (savedCart) {
-        this.$store.commit("SET_CART", JSON.parse(savedCart));
-      }
-    },
     ...mapActions(["DELETE_FROM_CART", "INCREMENT_CART_ITEM", "DECREMENT_CART_ITEM"]),
-  },
-  created() {
-    this.loadCartFromLocalStorage();
   },
 };
 </script>
-
 
 
 <style lang="scss" scoped>

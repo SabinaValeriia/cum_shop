@@ -1,8 +1,9 @@
 <template lang="pug">
 .catalog-item
   .catalog-block
-    img(:src="require('../assets/images/'+ product_data.image)" alt="")
-    button(@click="addToCart") Додати в корзину
+    router-link(:to="{ name: 'CartProduct', params: { article: product_data.article }, query: { data: product_data } }")
+      img(:src="require('../assets/images/' + product_data.image)" @click="showCardDetails(product_data)" alt="")
+      button(@click="addToCart") Додати до кошика
   h2 {{ product_data.name }}
   p.catalog-item__price Price: {{product_data.price}} Uah
 </template>

@@ -6,6 +6,7 @@ import CatalogView from '../views/CatalogView.vue'
 import LookBookView from '../views/LookBookView.vue'
 import CartComponent from "../components/CartComponent.vue"
 import InfoView from '../views/InfoView.vue'
+import CartView from '../views/CartView.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,12 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: CartComponent,
+    props: true
+  },
+  {
+    path: '/cartproduct/:article',
+    name: 'CartProduct',
+    component: CartView,
     props: true
   },
   {

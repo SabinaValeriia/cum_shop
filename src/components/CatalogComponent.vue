@@ -13,22 +13,22 @@
           a Всі категорії
           a Новинки
           a Роспродаж
-          input(type="checkbox") 
+          input(type="checkbox" v-model="selectedCategories" value="Сукні") 
           label Сукні
           input(type="checkbox") 
           label Юбки
-          input(type="checkbox") 
+          input(type="checkbox" v-model="selectedCategories" value="Блузи") 
           label Блузи
           input(type="checkbox") 
           label Футболки, топи
-          input(type="checkbox") 
-          label Жакети, жилети
+          input(type="checkbox" v-model="selectedCategories" value="Кардигани") 
+          label Кардигани
           input(type="checkbox") 
           label Джинси
           input(type="checkbox") 
           label Комбінезони
-          input(type="checkbox") 
-          label Спортивні костюми
+          input(type="checkbox" v-model="selectedCategories" value="Костюми") 
+          label Костюми
           input(type="checkbox") 
           label Пальто, плащі, куртки
         div
@@ -64,6 +64,7 @@ export default {
   },
   data() {
     return {
+      selectedCategories: [],
       sortType: "price",
       sortDirection: "asc",
       minPrice: "",
@@ -77,6 +78,11 @@ export default {
 
     sortedProducts() {
       let products = [...this.PRODUCTS];
+      if (this.selectedCategories.length > 0) {
+        products = products.filter((product) =>
+          this.selectedCategories.includes(product.category)
+        );
+      }
 
       if (this.minPrice) {
         products = products.filter(
@@ -181,14 +187,14 @@ export default {
       flex-direction: column;
       justify-content: left;
       a {
-        font-family: 'PTSans', sans-serif;
+        font-family: "PTSans", sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
         line-height: 130%;
         letter-spacing: 0.02em;
         text-transform: uppercase;
-        color: #474A51;
+        color: #474a51;
         text-align: left;
         margin: 0 0 10px 0;
       }

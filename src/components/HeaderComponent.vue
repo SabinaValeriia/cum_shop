@@ -1,6 +1,7 @@
 <template lang="pug">
 .container
   .header(v-if="isTabletScreen")
+    
     router-link(:to="{name: 'Home'}")
           img(src="../assets/images/logo.svg")
     ul 
@@ -76,16 +77,10 @@ export default {
   },
   computed: {
     ...mapGetters(["PRODUCTS", "CART"]),
-    // isTabletScreen() {
-    //   console.log(111);
-    //   return window.innerWidth <= 1021 && window.innerWidth <= 776;
-
-    // },
     isTabletScreen() {
       return window.innerWidth > 768 && window.innerWidth <= 1021;
     },
     isMobileScreens() {
-      console.log(211);
       return window.innerWidth <= 767;
     },
   },
@@ -96,13 +91,7 @@ export default {
 
     ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART"]),
   },
-  mounted() {
-    this.GET_PRODUCTS_FROM_API().then((response) => {
-      if (response.data) {
-        console.log("Data arrived!");
-      }
-    });
-  },
+ 
 };
 </script>
 
