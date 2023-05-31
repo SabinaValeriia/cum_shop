@@ -22,8 +22,8 @@
             input(type="checkbox" v-model="selectedCategories" value="Сукні") 
             label Сукні
           div.catalog--block-sort-input
-            input(type="checkbox") 
-            label Юбки
+            input(type="checkbox" v-model="selectedCategories" value="Спідниця") 
+            label Спідниця
           div.catalog--block-sort-input
             input(type="checkbox" v-model="selectedCategories" value="Блузи") 
             label Блузи
@@ -34,7 +34,7 @@
             input(type="checkbox" v-model="selectedCategories" value="Кардигани") 
             label Кардигани
           div.catalog--block-sort-input
-            input(type="checkbox") 
+            input(type="checkbox" v-model="selectedCategories" value="Джинси") 
             label Джинси
           div.catalog--block-sort-input
             input(type="checkbox") 
@@ -149,11 +149,6 @@ export default {
     },
   },
   methods: {
-    // filterProducts() {
-    //   // Logic for filtering products based on the search term
-    //   // You can customize this method according to your requirements
-    //   // For example, you can emit an event or update the filtered products directly
-    // },
     changePage(pageIndex) {
       this.currentPage = pageIndex;
     },

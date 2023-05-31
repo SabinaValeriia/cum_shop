@@ -49,10 +49,6 @@ export default {
     ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART"]),
   },
   created() {
-    // Получение артикула товара из параметров маршрута
-    // const article = this.$route.params.article;
-
-    // Получение данных о товаре из параметров запроса
     this.productData = this.$route.query.data;
   },
 };

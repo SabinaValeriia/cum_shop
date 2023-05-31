@@ -47,6 +47,9 @@ export default {
       height: 70px;
       width: 297px;
       cursor: pointer;
+      &.favorite{
+        top: 0;
+      }
     }
   }
   &-item {

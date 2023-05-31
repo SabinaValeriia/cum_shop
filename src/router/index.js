@@ -28,10 +28,11 @@ const routes = [
   {
     path: '/favorite',
     name: 'Favorite',
-    component: FavoriteView
+    component: FavoriteView,
+    props: true
   },
   {
-    path: '/cart',
+    path: '/carts',
     name: 'Cart',
     component: CartComponent,
     props: true

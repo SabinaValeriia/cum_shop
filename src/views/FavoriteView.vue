@@ -1,34 +1,408 @@
 <template lang="pug">
-    div
-        header-component
-        h1(v-if="!selectedCard") kdcmkcmsk
-        cart-product-item(:selectedCard="selectedCard")
-        //- catalog-component
-        footer-component
-    </template>
+  div
+    header-component
+    .container
+      .cart
+        h1 Вподобане
+        h2(v-if="!cart_data.length") У Вас ще не додано ніяких товарів ...
+          router-link(:to="{name: 'Catalog'}")
+            button До каталогу
+        .cart-block(v-else)
+          .cart-items
+            CartItem(
+              v-for="(item, index) in cart_data"
+              :key="item.article"
+              :cart_item_data="item"
+              @deleteFromCart="deleteFromCart(index)"
+              @increment="increment(index)"
+              @decrement="decrement(index)"
+            )
+          .cart__total
+            .cart__total-block
+              h2 Сума замовлення
+              h2 {{ cartTotalCost }} UAH
+            .cart__total-block
+              h2 Загалом
+              h2 {{ cartTotalCost }} UAH
+            router-link(:to="{ name: 'Delivery',  params: { totalCost: cartTotalCost } }")
+              button Оформити замовлення
+            p Натискаючи на кнопку, ви підтверджуєте, що ознайомлені та згодні з офертою та політикою конфіденційності.
+    footer-component
+</template>
+
 <script>
+import CartItem from "@/components/CartItem.vue";
 import HeaderComponent from "@/components/HeaderComponent.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
-import CartProductItem from "@/components/CartProductItem.vue";
-import CatalogComponent from "@/components/CatalogComponent.vue";
+import { mapActions } from "vuex";
+
 export default {
+  name: "CartComponent",
   components: {
+    CartItem,
     HeaderComponent,
     FooterComponent,
-    CartProductItem,
-    CatalogComponent,
   },
-  props: {},
-  data() {
-    return {
-      selectedCard: null,
-    };
+  props: {
+    cart_data: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
+  computed: {
+    cartTotalCost() {
+      let result = [];
+      if (this.cart_data.length) {
+        for (let item of this.cart_data) {
+          result.push(item.price * item.quantity);
+        }
+        result = result.reduce(function (sum, el) {
+          return sum + el;
+        });
+        return result;
+      } else {
+        return 0;
+      }
+    },
   },
   methods: {
-    showCardDetails(cart_item_data) {
-      console.log(this.selectedCard);
-      this.selectedCard = cart_item_data; // Установите выбранную карточку в переменную
+    deleteFromCart(index) {
+      this.DELETE_FROM_CART(index);
     },
+    increment(index) {
+      this.INCREMENT_CART_ITEM(index);
+    },
+    decrement(index) {
+      this.DECREMENT_CART_ITEM(index);
+    },
+    ...mapActions(["DELETE_FROM_CART", "INCREMENT_CART_ITEM", "DECREMENT_CART_ITEM"]),
   },
 };
 </script>
+
+
+<style lang="scss" scoped>
+.container {
+    max-width: 100%;
+  margin: 0 60px;
+  @media (max-width: 1021px) {
+    max-width: 100%;
+    margin: 0 30px;
+  }
+}
+.cart {
+  min-height: calc(100vh - 556px);
+  button {
+    padding: 15px 35px;
+    background: #dde8f6;
+    font-family: "Futura PT";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #474a51;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto 0;
+  }
+  a {
+    text-decoration: none;
+  }
+  h2 {
+    font-family: "Futura PT";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    text-align: center;
+    color: #9f9d9d;
+  }
+  h1 {
+    font-family: "Lovelace";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 52px;
+    line-height: 130%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #474a51;
+    margin: 80px auto;
+  }
+  &-block {
+    display: flex;
+
+    .cart__total {
+      margin-left: 109px;
+      width: 100%;
+      &-block {
+        display: flex;
+        justify-content: space-between;
+        h2 {
+          font-family: "Futura PT";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 24px;
+          line-height: 130%;
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+          color: #474a51;
+          margin: 10px 0;
+          text-align: left;
+        }
+      }
+      p {
+        font-family: "Futura PT";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 130%;
+        color: #474a51;
+        text-align: left;
+      }
+      button {
+        padding: 15px 35px;
+        background: #dde8f6;
+        border: none;
+        font-family: "Futura PT";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 130%;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: #474a51;
+        display: block;
+        margin: 34px 0 0 0;
+      }
+    }
+  }
+}
+@media (max-width: 1021px) {
+  .cart {
+    min-height: calc(100vh - 514px);
+    button {
+      padding: 15px 35px;
+      background: #dde8f6;
+      font-family: "Futura PT";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #474a51;
+      border: none;
+      cursor: pointer;
+      display: block;
+      margin: 30px auto 0;
+    }
+    a {
+      text-decoration: none;
+    }
+    h2 {
+      font-family: "Futura PT";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+      text-align: center;
+      color: #9f9d9d;
+    }
+    h1 {
+      font-family: "Lovelace";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 52px;
+      line-height: 130%;
+      text-align: center;
+      text-transform: uppercase;
+      color: #474a51;
+      margin: 50px auto;
+    }
+    &-block {
+      flex-direction: column;
+        .cart-items{
+        }
+      .cart__total {
+        margin-left: 0;
+        p{
+            margin-bottom: 50px;
+        }
+        &-block {
+          
+        }
+        
+       
+      }
+    }
+  }
+}
+</style>
+
+
+
+<style lang="scss" scoped>
+.container {
+    max-width: 100%;
+  margin: 0 60px;
+  @media (max-width: 1021px) {
+    max-width: 100%;
+    margin: 0 30px;
+  }
+}
+.cart {
+  min-height: calc(100vh - 556px);
+  button {
+    padding: 15px 35px;
+    background: #dde8f6;
+    font-family: "Futura PT";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #474a51;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 30px auto 0;
+  }
+  a {
+    text-decoration: none;
+  }
+  h2 {
+    font-family: "Futura PT";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    text-align: center;
+    color: #9f9d9d;
+  }
+  h1 {
+    font-family: "Lovelace";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 52px;
+    line-height: 130%;
+    text-align: center;
+    text-transform: uppercase;
+    color: #474a51;
+    margin: 80px auto;
+  }
+  &-block {
+    display: flex;
+
+    .cart__total {
+      margin-left: 109px;
+      width: 100%;
+      &-block {
+        display: flex;
+        justify-content: space-between;
+        h2 {
+          font-family: "Futura PT";
+          font-style: normal;
+          font-weight: 400;
+          font-size: 24px;
+          line-height: 130%;
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
+          color: #474a51;
+          margin: 10px 0;
+          text-align: left;
+        }
+      }
+      p {
+        font-family: "Futura PT";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 130%;
+        color: #474a51;
+        text-align: left;
+      }
+      button {
+        padding: 15px 35px;
+        background: #dde8f6;
+        border: none;
+        font-family: "Futura PT";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 130%;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        color: #474a51;
+        display: block;
+        margin: 34px 0 0 0;
+      }
+    }
+  }
+}
+@media (max-width: 1021px) {
+  .cart {
+    min-height: calc(100vh - 514px);
+    button {
+      padding: 15px 35px;
+      background: #dde8f6;
+      font-family: "Futura PT";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #474a51;
+      border: none;
+      cursor: pointer;
+      display: block;
+      margin: 30px auto 0;
+    }
+    a {
+      text-decoration: none;
+    }
+    h2 {
+      font-family: "Futura PT";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 130%;
+      text-align: center;
+      color: #9f9d9d;
+    }
+    h1 {
+      font-family: "Lovelace";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 52px;
+      line-height: 130%;
+      text-align: center;
+      text-transform: uppercase;
+      color: #474a51;
+      margin: 50px auto;
+    }
+    &-block {
+      flex-direction: column;
+        .cart-items{
+        }
+      .cart__total {
+        margin-left: 0;
+        p{
+            margin-bottom: 50px;
+        }
+        &-block {
+          
+        }
+        
+       
+      }
+    }
+  }
+}
+</style>

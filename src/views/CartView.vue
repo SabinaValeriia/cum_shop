@@ -1,8 +1,7 @@
 <template lang="pug">
     div
         header-component
-        cart-product-item(:selectedCard="selectedCard", @showCardDetails="showCardDetails")
-        //- catalog-component
+        cart-product-item
         footer-component
     </template>
 <script>

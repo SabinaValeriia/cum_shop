@@ -59,7 +59,7 @@
       input(type="text" v-if="showInput" v-model="searchQuery" placeholder="Пошук" @input="search")
       router-link(:to="{name: 'Registration'}")
         img(src="../assets/images/lr.svg")
-      router-link(:to="{name: 'Favorite'}")
+      router-link(:to="{name: 'Favorite' , params: {cart_data: CART}}")
         img(src="../assets/images/favorite.svg")
       router-link(:to="{name: 'Cart', params: {cart_data: CART}}")
         .header--cart

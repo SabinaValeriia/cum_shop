@@ -1,27 +1,23 @@
-<template>
-  <div class="cart-item">
-    <router-link :to="{ name: 'CartProduct', params: { article: cart_item_data.article }, query: { data: cart_item_data } }">
-      <img :src="require('../assets/images/' + cart_item_data.image)" @click="showCardDetails(cart_item_data)" alt="" />
-    </router-link>
-    <div class="cart-item__info">
-      <h2>{{ cart_item_data.name }}</h2>
-      <div class="cart-item__block">
-        <p>Розмір</p>
-        <p>Колір</p>
-      </div>
-      <div class="cart-item__quantity">
-        <div class="cart-item__block">
-          <p>Кількість:</p>
-          <p>
-            <span @click="decrementItem">-</span>
-            <span>{{ cart_item_data.quantity }}</span>
-            <span @click="incrementItem">+</span>
-          </p>
-        </div>
-      </div>
-      <p class="article">Артикул: {{ cart_item_data.article }}</p>
-      <p class="price">{{ cart_item_data.price }} UAH</p>
-      <button @click="deleteFromCart"></button>
+<template lang="pug">
+  .cart-item
+    router-link(:to="{ name: 'CartProduct', params: { article: cart_item_data.article }, query: { data: cart_item_data } }")
+      img(:src="require('../assets/images/' + cart_item_data.image)" @click="showCardDetails(cart_item_data)" alt="")
+    .cart-item__info
+      .favorite
+        h2 {{ cart_item_data.name }}
+        button.favorite
+      .cart-item__block
+        p Розмір
+        p Колір
+      .cart-item__quantity
+        .cart-item__block
+          p Кількість:
+            span(@click="decrementItem") -
+            span {{ cart_item_data.quantity }}
+            span(@click="incrementItem") +
+      p.article Артикул: {{ cart_item_data.article }}
+      p.price {{ cart_item_data.price }} UAH
+      button(@click="deleteFromCart")
     </div>
   </div>
 </template>
@@ -47,21 +43,9 @@ export default {
     incrementItem() {
       this.$emit("increment");
     },
-    // showCardDetails(cart_item_data) {
-    //   console.log(cart_item_data)
-    //   this.$emit("showCardDetails", cart_item_data); // Генерируйте событие, чтобы передать выбранную карточку в родительский компонент
-    // }
-    showCardDetails(cart_item_data) {
-      this.$router.push({
-        name: 'CartProduct',
-        params: { article: cart_item_data.article },
-        query: { data: cart_item_data }
-      });
-    }
   },
 };
 </script>
-
 
 <style lang="scss" scoped>
 .cart-item {
@@ -78,6 +62,11 @@ export default {
   &__info {
     position: relative;
     width: 100%;
+    .favorite {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
     p {
       text-align: left;
       font-family: "Futura PT";
@@ -120,16 +109,7 @@ export default {
       letter-spacing: 0.02em;
       text-transform: uppercase;
       color: #474a51;
-      margin: 0 0 20px 30px;
-      &::after {
-        display: inline-block;
-        content: "";
-        width: 22px;
-        height: 19px;
-        background-image: url("../assets/images/favorite.svg");
-        left: 117px;
-        margin-left: 5px;
-      }
+      margin: 0 0 0 30px;
     }
     button {
       content: "";
@@ -141,6 +121,16 @@ export default {
       border: none;
       top: 8px;
       right: 0;
+      &.favorite {
+        content: "";
+        display: inline-block;
+        background-image: url("../assets/images/favorite.svg");
+        width: 22px;
+        height: 20px;
+        position: relative;
+        border: none;
+        margin-left: 5px;
+      }
     }
   }
 }
