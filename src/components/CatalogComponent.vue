@@ -1,51 +1,52 @@
 <template lang="pug">
   .container.distance
-    //- header-component
     .catalog
-        h1 Каталог
-        .sort
-          div
-            label Пошук:
-            input(type="text" v-model="searchTerm" placeholder="Пошук")
-          div.distance
-            label(for="sortDirection") Сортування:
-            select(id="sortDirection" v-model="sortDirection")
-                option(value="asc") За зростанням
-                option(value="desc") За спаданням
-    .catalog--block
-      .catalog--block-sort
-        .catalog--block-category 
-          a Всі категорії
-          a Новинки
-          a Роспродаж
-          div.catalog--block-sort-input
-            input(type="checkbox" v-model="selectedCategories" value="Сукні") 
-            label Сукні
-          div.catalog--block-sort-input
-            input(type="checkbox" v-model="selectedCategories" value="Спідниця") 
-            label Спідниця
-          div.catalog--block-sort-input
-            input(type="checkbox" v-model="selectedCategories" value="Блузи") 
-            label Блузи
-          div.catalog--block-sort-input
-            input(type="checkbox" v-model="selectedCategories" value="Футболки") 
-            label Футболки, топи
-          div.catalog--block-sort-input
-            input(type="checkbox" v-model="selectedCategories" value="Кардигани") 
-            label Кардигани
-          div.catalog--block-sort-input
-            input(type="checkbox" v-model="selectedCategories" value="Джинси") 
-            label Джинси
-          div.catalog--block-sort-input
-            input(type="checkbox") 
-            label Комбінезони
-          div.catalog--block-sort-input
-            input(type="checkbox" v-model="selectedCategories" value="Костюми") 
-            label Костюми
-          div.catalog--block-sort-input.distance
-            input(type="checkbox" v-model="selectedCategories" value="Пальто") 
-            label Пальто, плащі, куртки
-          a Вартість
+      h1 Каталог
+      .sort
+        div
+          label Пошук:
+          input(type="text" v-model="searchTerm" placeholder="Пошук")
+          ul.similar-search
+            li(v-for="field in similarSearchFields" :key="field.id" @click="searchSimilar(field)") {{ field.name }}
+        div.distance
+          label(for="sortDirection") Сортування:
+          select(id="sortDirection" v-model="sortDirection")
+            option(value="asc") За зростанням
+            option(value="desc") За спаданням
+      .catalog--block
+        .catalog--block-sort
+          .catalog--block-category
+            a Всі категорії
+            a Новинки
+            a Роспродаж
+            div.catalog--block-sort-input
+              input(type="checkbox" v-model="selectedCategories" value="Сукні")
+              label Сукні
+            div.catalog--block-sort-input
+              input(type="checkbox" v-model="selectedCategories" value="Спідниця")
+              label Спідниця
+            div.catalog--block-sort-input
+              input(type="checkbox" v-model="selectedCategories" value="Блузи")
+              label Блузи
+            div.catalog--block-sort-input
+              input(type="checkbox" v-model="selectedCategories" value="Футболки")
+              label Футболки, топи
+            div.catalog--block-sort-input
+              input(type="checkbox" v-model="selectedCategories" value="Кардигани")
+              label Кардигани
+            div.catalog--block-sort-input
+              input(type="checkbox" v-model="selectedCategories" value="Джинси")
+              label Джинси
+            div.catalog--block-sort-input
+              input(type="checkbox")
+              label Комбінезони
+            div.catalog--block-sort-input
+              input(type="checkbox" v-model="selectedCategories" value="Костюми")
+              label Костюми
+            div.catalog--block-sort-input.distance
+              input(type="checkbox" v-model="selectedCategories" value="Пальто")
+              label Пальто, плащі, куртки
+            a Вартість
             div
               label(for="minPrice") Від:
               input(type="text" id="minPrice" v-model="minPrice")
@@ -53,21 +54,23 @@
               label(for="maxPrice") До:
               input(type="text" id="maxPrice" v-model="maxPrice")
             button(type="button" @click="clearFilters") Очистити фільтр
-      .catalog__list
-        CatalogItemComp(
+        .catalog__list
+          CatalogItemComp(
             v-for="product in paginatedProducts"
             :key="product.article"
             :product_data="product"
             @addToCart="addToCart"
-            )
+            @addToFavorite="addToFavorite"
+          )
     .pagination
-          button(
-            v-for="(page, pageIndex) in totalPages"
-            :key="pageIndex"
-            @click="changePage(pageIndex)"
-            :class="{ active: currentPage === pageIndex }"
-          ) {{ page }}
+      button(
+        v-for="(page, pageIndex) in totalPages"
+        :key="pageIndex"
+        @click="changePage(pageIndex)"
+        :class="{ active: currentPage === pageIndex }"
+      ) {{ page }}
 </template>
+
 <script>
 import CatalogItemComp from "@/components/CatalogItemComp.vue";
 import HeaderComponent from "./HeaderComponent.vue";
@@ -91,10 +94,20 @@ export default {
       searchTerm: "",
       currentPage: 0,
       itemsPerPage: 6,
+      searchHistory: [],
     };
   },
   computed: {
-    ...mapGetters(["PRODUCTS", "CART"]),
+    ...mapGetters(["PRODUCTS", "CART", "FAVORITE"]),
+    similarSearchFields() {
+      if (this.searchTerm) {
+        const searchTerm = this.searchTerm.toLowerCase();
+        return this.PRODUCTS.filter((product) =>
+          product.name.toLowerCase().includes(searchTerm)
+        );
+      }
+      return [];
+    },
 
     sortedProducts() {
       let products = [...this.PRODUCTS];
@@ -149,6 +162,12 @@ export default {
     },
   },
   methods: {
+    searchSimilar(field) {
+      this.searchTerm = field.name;
+      this.search();
+    },
+    search() {
+    },
     changePage(pageIndex) {
       this.currentPage = pageIndex;
     },
@@ -164,7 +183,24 @@ export default {
     handleAddToCart() {
       this.$emit("addToCart", this.product_data);
     },
-    ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART"]),
+    addToFavorite(data) {
+      this.ADD_TO_FAVORITE(data);
+    },
+    handleAddToFavorite() {
+      this.$emit("addToFavorite", this.product_data);
+    },
+    ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART", "ADD_TO_FAVORITE"]),
+  },
+  watch: {
+    searchTerm(newTerm) {
+      if (newTerm) {
+        this.searchHistory.unshift(newTerm);
+        localStorage.setItem(
+          "searchHistory",
+          JSON.stringify(this.searchHistory)
+        );
+      }
+    },
   },
   mounted() {
     if (localStorage.getItem("catalogData")) {
@@ -174,6 +210,11 @@ export default {
       this.minPrice = savedData.minPrice;
       this.maxPrice = savedData.maxPrice;
     }
+
+    if (localStorage.getItem("searchHistory")) {
+      this.searchHistory = JSON.parse(localStorage.getItem("searchHistory"));
+    }
+
     this.$watch(
       () => ({
         sortType: this.sortType,
@@ -186,6 +227,7 @@ export default {
       },
       { deep: true }
     );
+
     this.GET_PRODUCTS_FROM_API().then((response) => {
       if (response.data) {
         console.log("Data arrived!");
@@ -194,6 +236,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss" scoped>
 @import "../assets/styles/core/global.scss";
 
@@ -235,6 +278,19 @@ export default {
     justify-content: end;
     align-items: center;
     margin-bottom: 45px;
+    .similar-search{
+      position: absolute;
+      z-index: 1;
+      background: #eeeeee;
+      margin: 0;
+      padding: 0 0 20px 0;
+        li{
+          list-style: none;
+          padding: 20px 20px 0;
+          text-align: left;
+        }
+      
+    }
     input {
       border: 1px solid #eeeeee;
       margin-right: 29px;

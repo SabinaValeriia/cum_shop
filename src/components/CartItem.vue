@@ -5,7 +5,6 @@
     .cart-item__info
       .favorite
         h2 {{ cart_item_data.name }}
-        button.favorite
       .cart-item__block
         p Розмір
         p Колір
@@ -114,7 +113,7 @@ export default {
     button {
       content: "";
       display: inline-block;
-      background-image: url("../assets/images/close.svg");
+      background: url("../assets/images/close.svg");
       width: 16px;
       height: 16px;
       position: absolute;
@@ -124,7 +123,7 @@ export default {
       &.favorite {
         content: "";
         display: inline-block;
-        background-image: url("../assets/images/favorite.svg");
+        background: url("../assets/images/favorite.svg");
         width: 22px;
         height: 20px;
         position: relative;

@@ -9,7 +9,7 @@
         button Дивитися
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "../assets/styles/core/global.scss";
 .look {
   display: flex;
@@ -113,7 +113,7 @@
   .look {
     flex-direction: column-reverse;
     img {
-      height: 632px;
+      height: auto;
       width: 100%;
     }
     &__block {

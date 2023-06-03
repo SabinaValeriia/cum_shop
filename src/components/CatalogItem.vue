@@ -4,6 +4,7 @@
     router-link(:to="{ name: 'CartProduct', params: { article: product_data.article }, query: { data: product_data } }")
       img(:src="require('../assets/images/' + product_data.image)" @click="showCardDetails(product_data)" alt="")
       button(@click="addToCart") Додати до кошика
+      button.favorite(@click="addToFavorite") 
   h2 {{ product_data.name }}
   p.catalog-item__price Price: {{product_data.price}} Uah
 </template>
@@ -23,6 +24,9 @@ export default {
   methods: {
     addToCart() {
       this.$emit("addToCart", this.product_data);
+    },
+    addToFavorite() {
+      this.$emit("addToFavorite", this.product_data);
     },
   },
 };
@@ -45,17 +49,24 @@ export default {
       color: #474a51;
       background: #dde8f6 !important;
       height: 70px;
-      width: 297px;
+      width: 407px;
       cursor: pointer;
-      &.favorite{
-        top: 0;
-      }
     }
+    button.favorite{
+        display: inline-block;
+        content: "";
+        background: url("../assets/images/favorite.svg") !important;
+        top: 10px;
+        left: 20px;
+        width: 22px;
+        height: 20px;
+
+      }
   }
   &-item {
     img {
-      width: 297px;
-      height: 420px;
+      width: 407px;
+      height: 600px;
     }
     h2 {
       font-family: "PTSans", sans-serif;
@@ -66,7 +77,7 @@ export default {
       text-align: center;
       color: #474a51;
       margin: 20px 0 5px;
-      width: 298px;
+      width: 407px;
     }
     p {
       font-family: "PTSans", sans-serif;
@@ -100,7 +111,9 @@ export default {
         width: 339px;
         height: 506px;
       }
-      
+      h2 {
+        width: 339px;
+      }
     }
   }
 }
@@ -109,15 +122,16 @@ export default {
     &-block {
       button {
         height: 70px;
-        width: 300px;
+        width: 100%;
         cursor: pointer;
       }
     }
     &-item {
       img {
-        width: 300px;
+        width: 100%;
         height: 442px;
       }
+      
       
     }
   }

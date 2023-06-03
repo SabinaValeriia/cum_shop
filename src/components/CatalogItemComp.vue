@@ -4,6 +4,7 @@
     router-link(:to="{ name: 'CartProduct', params: { article: product_data.article }, query: { data: product_data } }")
       img(:src="require('../assets/images/' + product_data.image)" @click="showCardDetails(product_data)" alt="")
       button(@click="addToCart") Додати до кошика
+      button(top="0" @click="addToFavorite") Додати до fav
   h2 {{ product_data.name }}
   p.catalog-item__price Price: {{product_data.price}} Uah
 </template>
@@ -25,11 +26,14 @@ export default {
     addToCart() {
       this.$emit("addToCart", this.product_data);
     },
+    addToFavorite() {
+      this.$emit("addToFavorite", this.product_data);
+    },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../assets/styles/core/global.scss";
 .catalog {
   &-block {

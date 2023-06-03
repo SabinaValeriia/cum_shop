@@ -18,7 +18,7 @@
         img(src="../assets/images/insta4.svg")
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "../assets/styles/core/global.scss";
 .instagram {
     margin-top: 160px;
@@ -59,7 +59,7 @@
         display: flex;
     }
         div{
-            background-image: url("../assets/images/insta1.svg");
+            background: url("../assets/images/insta1.svg");
             cursor: pointer;
             position: relative;
             &:hover{
@@ -128,7 +128,7 @@
         display: flex;
     }
         div{
-            background-image: url("../assets/images/insta1.svg");
+            background: url("../assets/images/insta1.svg");
             cursor: pointer;
             position: relative;
             &:hover{
@@ -191,7 +191,7 @@
         display: flex;
     }
         div{
-            background-image: url("../assets/images/insta1.svg");
+            background: url("../assets/images/insta1.svg");
             cursor: pointer;
             position: relative;
             &:hover{

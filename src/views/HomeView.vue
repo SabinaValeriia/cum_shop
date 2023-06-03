@@ -35,14 +35,17 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(["PRODUCTS", "CART"]),
+    ...mapGetters(["PRODUCTS", "CART", "FAVORITE"]),
   },
   methods: {
     addToCart(data) {
       this.ADD_TO_CART(data);
     },
+    addToFavorite(data) {
+      this.ADD_TO_FAVORITE(data);
+    },
 
-    ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART"]),
+    ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART", "ADD_TO_FAVORITE"]),
   },
   mounted() {
     this.GET_PRODUCTS_FROM_API().then((response) => {
@@ -55,10 +58,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 body {
-  margin: 0 auto;
+  margin: 0 !important;
 }
 .main{
   overflow-x: hidden;
+  margin: 0 !important;
 }
 button {
   padding: 15px 35px;

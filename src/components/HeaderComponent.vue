@@ -16,29 +16,35 @@
     .header--block 
         router-link(:to="{name: 'Registration'}")
           img(src="../assets/images/lr.svg")
-        router-link(:to="{name: 'Registration'}")
+        router-link(:to="{name: 'Favorite', params: {favorite_data: FAVORITE}}")
           img(src="../assets/images/favorite.svg")
         router-link(:to="{name: 'Cart', params: {cart_data: CART}}")
           .header--cart
             img.header__cart--img(src="../assets/images/cart.svg")  
             p {{ CART.length }}
   .header(v-else-if="isMobileScreens")
+    <div class="burger-menu">
+      <input type="checkbox" id="burger-checkbox" v-model="isOpen" @change="toggleMenu">
+      <label for="burger-checkbox" class="burger-icon">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+      <div class="menu" v-if="isOpen">
+        ul 
+          li  
+            router-link(:to="{name: 'Catalog'}")  Каталог
+          li 
+            router-link(:to="{name: 'LookBook'}") lookbook
+          li 
+            router-link(:to="{name: 'About'}") про бренд
+          li 
+            router-link(:to="{name: 'Info'}") інформація
+      </div>
+    </div>
     router-link(:to="{name: 'Home'}")
           img(src="../assets/images/logo.svg")
-    //- ul 
-    //-   li  
-    //-     router-link(:to="{name: 'About'}") Каталог
-    //-   li 
-    //-     router-link(:to="{name: 'Lookbook'}") lookbook
-    //-   li 
-    //-     router-link(:to="{name: 'About'}") про бренд
-    //-   li 
-    //-     router-link(:to="{name: 'Info'}") інформація
     .header--block 
-        //- img(src="../assets/images/search.svg")
-        //- router-link(:to="{name: 'Registration'}")
-        //-   img(src="../assets/images/lr.svg")
-        //- img(src="../assets/images/favorite.svg")
         router-link(:to="{name: 'Cart', params: {cart_data: CART}}")
           .header--cart
             img.header__cart--img(src="../assets/images/cart.svg")  
@@ -59,7 +65,7 @@
       input(type="text" v-if="showInput" v-model="searchQuery" placeholder="Пошук" @input="search")
       router-link(:to="{name: 'Registration'}")
         img(src="../assets/images/lr.svg")
-      router-link(:to="{name: 'Favorite' , params: {cart_data: CART}}")
+      router-link(:to="{name: 'Favorite' , params: {favorite_data: FAVORITE}}")
         img(src="../assets/images/favorite.svg")
       router-link(:to="{name: 'Cart', params: {cart_data: CART}}")
         .header--cart
@@ -78,10 +84,11 @@ export default {
     return {
       showInput: false,
       searchQuery: "",
+      isOpen: false,
     };
   },
   computed: {
-    ...mapGetters(["PRODUCTS", "CART"]),
+    ...mapGetters(["PRODUCTS", "CART", "FAVORITE"]),
     isTabletScreen() {
       return window.innerWidth > 768 && window.innerWidth <= 1021;
     },
@@ -90,20 +97,25 @@ export default {
     },
   },
   methods: {
+    toggleMenu() {
+      this.isOpen = !this.isOpen;
+    },
     addToCart(data) {
       this.ADD_TO_CART(data);
     },
+    addToFavorite(data) {
+      console.log(data);
+      this.ADD_TO_FAVORITE(data);
+    },
 
-    ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART"]),
+    ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART", "ADD_TO_FAVORITE"]),
     search: debounce(function () {
-      // Handle the search functionality using the searchQuery value
-      // You can implement your own logic here, such as filtering the products based on the searchQuery
       console.log("Search query:", this.searchQuery);
     }, 300),
     showSearchInput() {
       this.showInput = !this.showInput;
       if (!this.showInput) {
-        this.searchQuery = ""; // Clear the search query when hiding the input
+        this.searchQuery = "";
       }
     },
   },
@@ -111,6 +123,61 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.burger-menu {
+  position: relative;
+}
+
+.burger-icon {
+  display: block;
+  width: 30px;
+  height: 15px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.burger-icon span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: #285DA1;
+  margin-bottom: 5px;
+  transition: transform 0.3s;
+}
+
+.burger-menu input[type="checkbox"] {
+  display: none;
+}
+
+.burger-menu input[type="checkbox"]:checked ~ .menu {
+  display: block;
+}
+
+.menu {
+  display: none;
+  position: absolute;
+  top: 37px;
+  left: 0;
+  width: 375px;
+  height: 100vh;
+  background-color: #FFFFFF;
+  padding: 10px;
+  z-index: 1;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  padding: 20px;
+}
+
+.menu a {
+  color: #285DA1;
+  text-decoration: none;
+}
 .container {
   max-width: 100%;
   margin: 0 60px;
@@ -119,6 +186,10 @@ export default {
     margin: 0 30px;
   }
   @media (max-width: 776px) {
+    max-width: 100%;
+    margin: 0 30px;
+  }
+  @media (max-width: 375px) {
     max-width: 100%;
     margin: 0 10px;
   }
@@ -161,6 +232,7 @@ export default {
   ul {
     list-style: none;
     display: flex;
+    padding: 0;
 
     li {
       a {
@@ -246,6 +318,19 @@ export default {
       &:nth-child(2) {
         margin: 0 20px;
       }
+    }
+  }
+}
+@media (max-width: 375px) {
+  .header {
+    height: 50px;
+    ul{
+        flex-direction: column;
+        li { 
+          a{
+            text-align: left;
+          }
+        }
     }
   }
 }

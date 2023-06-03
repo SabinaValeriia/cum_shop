@@ -39,7 +39,7 @@ data() {
 </script>
 
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "../assets/styles/core/global.scss";
 .container {
   max-width: 100%;

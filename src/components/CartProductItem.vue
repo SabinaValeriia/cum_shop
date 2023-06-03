@@ -18,6 +18,7 @@
         p Виробник: {{ productData.descT }}
         .product-main--button 
             button(@click="addToCart") Додати до кошика
+            button.favorite(@click="addToFavorite") Додати до fav
             
    
 </template>
@@ -46,7 +47,13 @@ export default {
     handleAddToCart() {
       this.$emit("addToCart", this.product_data);
     },
-    ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART"]),
+    addToFavorite(data) {
+      this.ADD_TO_FAVORITE(data);
+    },
+    handleAddToFavorite() {
+      this.$emit("addToFavorite", this.product_data);
+    },
+    ...mapActions(["GET_PRODUCTS_FROM_API", "ADD_TO_CART", "ADD_TO_FAVORITE"]),
   },
   created() {
     this.productData = this.$route.query.data;
